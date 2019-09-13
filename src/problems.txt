@@ -1,9 +1,13 @@
-Main Problem : we cannot get a duration time of video because thats request in youtube maked by js response
-and beatiful soup cannot catch this duration 
+Main Problem : we cannot get a duration time of video because that`s request in youtube maked by js response
+and beatifulsoup cannot catch this duration 
 
 my solution : 
 	save this html web page in html file
 		and get the duration from this file  
+             but we have another problem after execution this solution we will get a many html files
+              solution : remove file after stop application
+  another problem here if ahmed and mohamed send a two requests to site for get duration of play list i don`t know what I don't know what will happen but we will definitely have a problem here
+and solution make a unique file name with random library filename3156.html 
 
 second problem : 
 	after get a playlist duration
