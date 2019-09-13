@@ -1,0 +1,12 @@
+{% extends 'playlist_duration_app/base.html' %}
+{% block content %}
+
+<form class='bg-light p-5 shadow col-sm-8 ' method="post">
+	<header class='bg-white p-3 m-3 border'>
+		{{duration}} hours
+	</header>
+	{% csrf_token %}
+	{{ form }}
+	<input class="btn btn-primary mt-4 mb-4 col-sm-6" type="submit" name="">
+</form>
+{% endblock  %}

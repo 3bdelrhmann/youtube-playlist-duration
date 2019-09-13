@@ -1,0 +1,19 @@
+Main Problem : we cannot get a duration time of video because thats request in youtube maked by js response
+and beatiful soup cannot catch this duration 
+
+my solution : 
+	save this html web page in html file
+		and get the duration from this file  
+
+second problem : 
+	after get a playlist duration
+	return x.99655487313
+	i am searching for solve this problem and get two numbers after point
+	and i found solution but the solution must use math library and thats not an effective solution for this case
+
+my solution : 
+	covert this folating number to string and in python thats string is a list
+		thats great get list from zero to 5 
+			array[:4]
+			will print 
+			1.31
