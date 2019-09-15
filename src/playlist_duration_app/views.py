@@ -14,7 +14,6 @@ def index(request):
 		if form.is_valid():
 			link = form.cleaned_data['link'] ## get our link from form
 			url  = link 
-
 			## Check if link is a valid url
 			try:
 				page = urllib.request.urlopen(url) ## open url 
@@ -26,7 +25,7 @@ def index(request):
 				f = open(fileName, 'w')
 				sys.stdout = f
 
-				print(soup.encode("utf-8"))
+				print(soup.html.parent.encode("utf-8"))
 				sys.stdout = orig_stdout
 				## after this code we now having creat a new file containing a html webpage
 				f.close()
@@ -35,8 +34,7 @@ def index(request):
 				with open(fileName,'r') as f:
 					   contents = f.read()
 					   htmlFileSoup = BeautifulSoup(contents,'html.parser')
-					   sum = 0
-					   videoDuration = []
+					   mainDurationList = []
 					   ## check if our url is a youtube playlist url
 					   if htmlFileSoup.select('.pl-video-time .more-menu-wrapper .timestamp span'):
 					  	   ## get duration of all videeos in playlist
@@ -47,19 +45,28 @@ def index(request):
 						       r = item.text
 						       removeSlash = r.replace('\\n','')
 						       removeSpaces = removeSlash.replace(' ','')
-						       Change = removeSpaces.replace(':','.')
-						       s = float(Change)
-						       videoDuration.append(s)
-						   for time in videoDuration:
-						       sum = sum+time
-						   duration = (sum / 60)
-						   covertToStr = str(duration) 
-						   duration = covertToStr[:4]
+						       Change = removeSpaces.split(':')
+						       convertStrForInt = [ int(z) for z in Change ]
+						       if len(convertStrForInt) < 3:
+						           convertStrForInt.insert(0,0)
+						           mainDurationList.append(convertStrForInt)
+						       else:
+						           mainDurationList.append(convertStrForInt)
+						   a = [sum(x) for x in zip(*mainDurationList)]
+						  
+						   if a[1] < 60:
+						       mins = a[1] / 60
+						       PlaylistDuration = str(a[0]) + ' Hours ' + str(a[1]) + ' Mins'
+						   else:
+						       PlaylistDuration = str(a[0]) + ' Hours ' + str(a[1]) + ' Mins'
+						   duration = PlaylistDuration
+
 					   else:
-						   duration = 'Please enter valid url'
-				os.remove(fileName)	
-			except:
-				duration = 'Please enter valid url'
+						   duration = 'Please enter valid playlist url'
+				os.remove(fileName)
+			except Exception as e:
+				duration = e
+
 
 	else:
 		form = linkForm()		

@@ -21,3 +21,20 @@ my solution :
 			array[:4]
 			will print 
 			1.31
+third problem : 
+	in some playlist could not convert string because having an hours and after converting : '1.05.42'
+	my application working on video duration in mins if a play list having a video duration hour
+	code cannot reading this number 1.05.24
+									1 = Hour 
+									5 = Minutes
+									42 = Sec
+	after many trying solutions :
+		thats last ::
+			add the time in list of main list duration all videos in playlist like that
+			[ [1,5,42], ]
+			if video duration less than 1 hour like 25.30 25Min 30Sec
+			add to main list like that
+			[ [1,5,42],[0,25,30] ]
+			and sum values
+
+
